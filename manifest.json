@@ -3,13 +3,19 @@
     "name": "Analysis Unlocker v1",
     "description": "Libre moment",
     "version": "0.1.3",
+    "background": {
+        "service_worker": "background.js"
+    },
+    "action": {
+        "default_popup": "index.html"
+    },
     "content_scripts": [
         {
-          "js": ["scripts/contentScript.js"],
-          "matches": [
-            "https://www.chess.com/member/ben-kang",
-            "https://www.chess.com/member/*"
-          ]
+            "js": ["scripts/contentScript.js"], 
+            "matches": [
+                "https://www.chess.com/member/ben-kang",
+                "https://www.chess.com/member/*"
+            ]
         }
     ]
 }

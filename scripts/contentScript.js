@@ -1,9 +1,16 @@
-const buttonOneTest = document.querySelector(".archived-games-link");
-
-if (buttonOneTest) {
-    buttonOneTest.setAttribute("id", "TESTBUTTON");
-    buttonOneTest.style.cssText = "color: red";
+function handleButtonClick() {
+    const buttonOneTest = document.querySelector(".archived-games-link");
+    if (buttonOneTest) {
+        buttonOneTest.setAttribute("id", "TESTLINK");
+        buttonOneTest.style.cssText = "color: red";
+    }
 }
+
+chrome.runtime.onMessage.addListener((message) => {
+    if (message === "buttonClicked") {
+        handleButtonClick();
+    }
+});
 
 
 
