@@ -1,0 +1,15 @@
+{
+    "manifest_version": 3,
+    "name": "Analysis Unlocker v1",
+    "description": "Libre moment",
+    "version": "0.1.3",
+    "content_scripts": [
+        {
+          "js": ["scripts/contentScript.js"],
+          "matches": [
+            "https://www.chess.com/member/ben-kang",
+            "https://www.chess.com/member/*"
+          ]
+        }
+    ]
+}
