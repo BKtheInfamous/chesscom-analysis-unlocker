@@ -13,6 +13,8 @@ function removeChildNodes() {
   
 
 let buttonSum = 0;
+let idToReturn = "";
+let urlToReturn = "";
 
 function buttonTestOne() {
     const buttonOneTests = document.querySelectorAll(".archived-games-link");
@@ -24,7 +26,7 @@ function buttonTestOne() {
             addButton.removeChild(addButton.firstChild);
         }
         let chooseGame = document.createElement('button');
-        chooseGame.textContent = "GAME "+ buttonSum;
+        chooseGame.textContent = "unlock analysis "+ buttonSum;
         chooseGame.setAttribute('id', "testButtonElementFinder"+buttonSum);
         chooseGame.classList.add("log-button-link");
         chooseGame.style.cssText = "background-color: brown; color: white";
@@ -34,7 +36,19 @@ function buttonTestOne() {
 
         /*let text = document.createElement("div");
         text.textContent = "test "+buttonSum;
-        addButton.appendChild(text);*/        
+        addButton.appendChild(text);*/ 
+    
+        chooseGame.addEventListener('click', () => {
+            chrome.runtime.sendMessage({ action: "getTabUrl" }, (response) => {
+                if (response && response.url) {
+                    console.log("Current tab URL:", response.url);
+                    urlToReturn = response.url;
+                }
+            });        
+            idToReturn = "Button ID: " + chooseGame.id;
+            console.log("Button ID: " + chooseGame.id);
+            //console.log("Parent element HTML: " + parentElementHTML);
+        });
     });
 
     buttonOneTests.forEach((buttonOneTest) => {

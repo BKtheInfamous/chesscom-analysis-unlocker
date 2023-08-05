@@ -11,5 +11,8 @@
             "https://www.chess.com/member/*"          
           ]
         }
-    ]
+    ],
+    "background": {
+      "service_worker": "background.js"
+    }
 }
