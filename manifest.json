@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "Analysis Unlocker v1",
     "description": "Libre moment",
-    "version": "0.1.5",
+    "version": "0.1.6",
     "content_scripts": [
         {
           "js": ["scripts/contentScript.js"],

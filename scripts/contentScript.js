@@ -1,4 +1,52 @@
-setTimeout(buttonTestOne, 100);
+//alert("contenScript entrance");
+
+setTimeout(buttonTestOne, 1000);
+//setTimeout(removeChildNodes, 1000);
+
+
+function removeChildNodes() {
+    let parentContainer = document.querySelector('.archived-games-icon-block');
+    while (parentContainer.firstChild) {
+      parentContainer.removeChild(parentContainer.firstChild);
+    }
+  }
+  
+
+let buttonSum = 0;
+
+function buttonTestOne() {
+    const buttonOneTests = document.querySelectorAll(".archived-games-link");
+    const addButtons = document.querySelectorAll(".archived-games-icon-block");
+
+    addButtons.forEach((addButton) => {
+        buttonSum++;
+        while (addButton.firstChild) {
+            addButton.removeChild(addButton.firstChild);
+        }
+        let chooseGame = document.createElement('button');
+        chooseGame.textContent = "GAME "+ buttonSum;
+        chooseGame.setAttribute('id', "testButtonElementFinder"+buttonSum);
+        chooseGame.classList.add("log-button-link");
+        chooseGame.style.cssText = "background-color: brown; color: white";
+        //console.log("button pre inject");
+        addButton.appendChild(chooseGame);
+        //console.log("button post inject");
+
+        /*let text = document.createElement("div");
+        text.textContent = "test "+buttonSum;
+        addButton.appendChild(text);*/        
+    });
+
+    buttonOneTests.forEach((buttonOneTest) => {
+        buttonOneTest.style.cssText = "color: red";
+    });
+}
+
+
+
+/*alert("contenScript entrance")
+
+setTimeout(buttonTestOne, 1000);
 
 function buttonTestOne() {
     const buttonOneTest = document.querySelector(".archived-games-link");
@@ -8,6 +56,7 @@ function buttonTestOne() {
         console.log("addButton entrance  inject");
         let chooseGame = document.createElement('button');
         chooseGame.textContent = "GAME 1";
+        chooseGame.setAttribute('id', "testButtonElementFinder");
         chooseGame.style.cssText ="background-color: brown; color: white";
         console.log("button pre inject");
         addButton.appendChild(chooseGame);
@@ -16,7 +65,7 @@ function buttonTestOne() {
     if (buttonOneTest) {
         buttonOneTest.style.cssText = "color: red";
     }
-}
+}*/
 
 
 /*function createButton() {
