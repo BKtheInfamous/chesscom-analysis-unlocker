@@ -1,17 +1,22 @@
-function handleButtonClick() {
+setTimeout(buttonTestOne, 100);
+
+function buttonTestOne() {
     const buttonOneTest = document.querySelector(".archived-games-link");
+    const addButton = document.querySelector(".archived-games-analyze-cell")
+    // let buttonOneTest = document.getElementById("title");  
+    if (addButton) {
+        console.log("addButton entrance  inject");
+        let chooseGame = document.createElement('button');
+        chooseGame.textContent = "GAME 1";
+        chooseGame.style.cssText ="background-color: brown; color: white";
+        console.log("button pre inject");
+        addButton.appendChild(chooseGame);
+        console.log("button post inject");
+    } 
     if (buttonOneTest) {
-        buttonOneTest.setAttribute("id", "TESTLINK");
         buttonOneTest.style.cssText = "color: red";
     }
 }
-
-chrome.runtime.onMessage.addListener((message) => {
-    if (message === "buttonClicked") {
-        handleButtonClick();
-    }
-});
-
 
 
 /*function createButton() {
@@ -47,3 +52,51 @@ document.addEventListener("DOMContentLoaded", () => {
         "16": "bron.jpeg"
       }
     },*/
+
+
+/* OLD MANIFEST
+
+{
+    "manifest_version": 3,
+    "name": "Analysis Unlocker v1",
+    "description": "Libre moment",
+    "version": "0.1.4",
+    "background": {
+        "service_worker": "background.js"
+    },
+    "action": {
+        "default_popup": "index.html"
+    },
+    "content_scripts": [
+        {
+          "js": ["scripts/contentScript.js"],
+          "matches": [
+            "https://www.chess.com/member/ben-kang",
+            "https://www.chess.com/member/*"
+          ]
+        }
+    ]
+}
+*/
+
+
+/* 
+
+{
+    "manifest_version": 3,
+    "name": "Analysis Unlocker v1",
+    "description": "Libre moment",
+    "version": "0.1.3",
+    "action": {
+        "default_popup": "index.html"
+    },
+    "content_scripts": [
+        {
+          "js": ["scripts/contentScript.js"],
+          "matches": [
+            "https://www.chess.com/member/ben-kang",
+            "https://www.chess.com/member/*"
+          ]
+        }
+    ]
+}*/

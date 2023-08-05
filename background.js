@@ -1,6 +1,16 @@
-chrome.action.onClicked.addListener((tab) => {
+/* chrome.action.onClicked.addListener((tab) => {
     chrome.tabs.sendMessage(tab.id, "buttonClicked");
 });
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    if (message === "executeContentScript") {
+        chrome.scripting.executeScript({
+            target: { tabId: sender.tab.id },
+            function: handleButtonClick,
+        });
+    }
+}); */
+
 
 
 
