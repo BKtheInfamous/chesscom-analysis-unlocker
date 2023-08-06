@@ -2,8 +2,6 @@
 setTimeout(buttonTestOne, 1000);  
 
 let buttonSum = 0;
-let idToReturn = "";
-let urlToReturn = "";
 
 function buttonTestOne() {
     const buttonOneTests = document.querySelectorAll(".archived-games-link");
@@ -15,16 +13,20 @@ function buttonTestOne() {
             addButton.removeChild(addButton.firstChild);
         }
         let chooseGame = document.createElement('button');
-        chooseGame.textContent = "unlock analysis "+ buttonSum;
+        chooseGame.textContent = "unlock analysis";
         chooseGame.setAttribute('id', "testButtonElementFinder"+buttonSum);
         chooseGame.classList.add("log-button-link");
         chooseGame.style.cssText = "background-color: brown; color: white";
         addButton.appendChild(chooseGame);
     
         chooseGame.addEventListener('click', () => {
-            let currentUrl = window.location.href;
-            console.log("URL: "+currentUrl);
-            chrome.runtime.sendMessage({ url: currentUrl });
+            let tr = chooseGame.closest('tr');
+            let parentOfLinkEle = tr.querySelector(".archived-games-analyze-cell");
+            let linkEle = parentOfLinkEle.querySelector('a');
+            let analysisLinkRaw = linkEle.getAttribute('href');
+            let analysisLink = "https://www.chess.com" + analysisLinkRaw +"?tab=review"
+            console.log("Analysis URL: "+analysisLink);
+            chrome.runtime.sendMessage({ url: analysisLink });
         });
     });
 

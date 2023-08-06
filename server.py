@@ -48,11 +48,11 @@ def receive_url():
 
     time.sleep(1)
     driver.get(url)
+    time.sleep(10)
+    driver.get("https://www.chess.com/")
+    time.sleep(1)
+    driver.close()
     return "Received"
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5002)  
-
-
-"""
-"""
+    app.run(host='0.0.0.0', port=5002) 
