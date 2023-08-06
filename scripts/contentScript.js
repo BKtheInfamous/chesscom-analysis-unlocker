@@ -22,17 +22,9 @@ function buttonTestOne() {
         addButton.appendChild(chooseGame);
     
         chooseGame.addEventListener('click', () => {
-            chrome.runtime.sendMessage({ action: "getTabUrl" }, (response) => {
-                if (response && response.url) {
-                    console.log("Current tab URL:", response.url);
-                    urlToReturn = response.url;
-                }
-            });
-            idToReturn = chooseGame.id;
-            console.log("Button ID: " + chooseGame.id);
-            // chrome.runtime.sendMessage({ action: "sendDataToPython", id: idToReturn, url: urlToReturn });
-            console.log("URL ID: " + urlToReturn);
-            chrome.runtime.connect({ name: "contentScriptToBackground" }).postMessage({ action: "sendDataToPython", idToReturn, urlToReturn });
+            let currentUrl = window.location.href;
+            console.log("URL: "+currentUrl);
+            chrome.runtime.sendMessage({ url: currentUrl });
         });
     });
 

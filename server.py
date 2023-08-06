@@ -1,4 +1,6 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import NoSuchElementException
@@ -7,6 +9,7 @@ import time
 
 
 app = Flask(__name__)
+CORS(app)  
 
 def open_url_in_selenium(url):
     options = webdriver.ChromeOptions()
@@ -30,9 +33,13 @@ def login_to_site(driver, username, password):
     password_field.send_keys(Keys.RETURN)
     #time.sleep(5)  
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['POST'])
 def receive_url():
-    
+    #INJECTION FROM EXT
+    data = request.get_json()
+    url = data.get('url')
+    #end of injection
+
     username = "*"
     password = "*"
 
@@ -40,17 +47,12 @@ def receive_url():
     login_to_site(driver, username, password)
 
     time.sleep(1)
-    driver.get("https://www.chess.com/analysis/game/live/84755541963?tab=review")
+    driver.get(url)
     return "Received"
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5002)  # Replace host and port as needed
+    app.run(host='0.0.0.0', port=5002)  
 
 
 """
-@app.route('/', methods=['POST'])
-def receive_url():
-    #data = request.get_json()
-    #url = data.get('url')
-    open_url_in_selenium("https://google.com/")
-    return "Received"""
+"""

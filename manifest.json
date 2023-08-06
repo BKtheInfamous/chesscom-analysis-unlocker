@@ -2,17 +2,18 @@
     "manifest_version": 3,
     "name": "Analysis Unlocker",
     "description": "Libre moment for chess, long live free analysis with fancy icons",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "content_scripts": [
         {
-          "js": ["scripts/contentScript.js"],
-          "matches": [
-            "https://www.chess.com/member/ben-kang",
-            "https://www.chess.com/member/*"          
-          ]
+            "js": ["scripts/contentScript.js"],
+            "matches": [
+                "https://www.chess.com/member/ben-kang",
+                "https://www.chess.com/member/*"
+            ]
         }
     ],
     "background": {
-      "service_worker": "background.js"
-    }
+        "service_worker": "background.js"
+    },
+    "permissions": ["scripting", "/*"]
 }
