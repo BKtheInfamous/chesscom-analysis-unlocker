@@ -1,20 +1,29 @@
 from selenium import webdriver
+import json
+import time
 
-options = webdriver.ChromeOptions()
-options.add_experimental_option('detach', True)
-driver = webdriver.Chrome(options=options)
+time.sleep(3)
 
-driver.get("https://google.com/")
+# Function to handle messages received from the extension
+def on_message(message, sender, send_response):
+    data = json.loads(message)
+    id_to_return = data.get('idToReturn')
+    url_to_return = data.get('urlToReturn')
 
-"""
-# alternatively with auto-close...
+    driver = webdriver.Chrome()
+    driver.get(url_to_return)
 
-import os
+# Connect to extension
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_experimental_option('detach', True)
+chrome_options.add_argument("chrome-extension://ghpmobmlgmlldmpmcanmkciheneeljbl/")  # Replace with your extension ID
+driver = webdriver.Chrome(chrome_options=chrome_options)
 
-os.environ['PATH'] += r"/Users/bk/CS-misc/seleniumDrivers/C2/chromedriver"
-driver = webdriver.Chrome()
-driver.get("https://google.com/")
+port = driver.execute_cdp_cmd('connect', {'name': 'pythonPort'})
+port.on_message = on_message
 
-time.sleep(5)
+# Selenium script here
 
-"""
+# Don't forget to close the connection when done
+time.sleep(10)
+driver.close()

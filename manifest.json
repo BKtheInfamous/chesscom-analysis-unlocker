@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
-    "name": "Analysis Unlocker v1",
-    "description": "Libre moment",
-    "version": "0.1.6",
+    "name": "Analysis Unlocker",
+    "description": "Libre moment for chess, long live free analysis with fancy icons",
+    "version": "0.2.0",
     "content_scripts": [
         {
           "js": ["scripts/contentScript.js"],
