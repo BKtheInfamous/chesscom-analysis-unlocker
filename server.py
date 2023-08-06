@@ -48,9 +48,10 @@ def receive_url():
 
     time.sleep(1)
     driver.get(url)
-    time.sleep(10)
+    time.sleep(3)
     driver.get("https://www.chess.com/")
     time.sleep(1)
+    
     driver.close()
     return "Received"
 
