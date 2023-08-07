@@ -40,18 +40,15 @@ def receive_url():
     url = data.get('url')
     #end of injection
 
-    username = "*"
-    password = "*"
+    username = "ben-kang"
+    password = "#*"
 
     driver = open_url_in_selenium("https://www.chess.com/login")
     login_to_site(driver, username, password)
 
     time.sleep(1)
     driver.get(url)
-    time.sleep(3)
-    driver.get("https://www.chess.com/")
-    time.sleep(1)
-    
+    time.sleep(8)
     driver.close()
     return "Received"
 

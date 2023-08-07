@@ -10,7 +10,7 @@
     <array>
         <string>/Users/bk/repos/chesscom-analysis-unlocker/venv/bin/gunicorn</string>
         <string>-b</string>
-        <string>127.0.0.1:5002</string>
+        <string>192.168.1.68:5002</string>
         <string>server:app</string>
     </array>
     <key>RunAtLoad</key>
