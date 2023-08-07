@@ -17,14 +17,14 @@ def open_url_in_selenium(url):
     service = Service('/usr/local/bin/chromedriver')
     service.start()
     options = webdriver.ChromeOptions()
-    options.add_argument('--no-sandbox')  # Add this line
-    options.add_argument('--disable-dev-shm-usage')  # Add this line
-    options.add_argument('--headless')
-    options.add_argument('--disable-gpu')
-    options.add_argument('--disable-extensions')
-    options.add_argument('--remote-debugging-port=9222')  # Add this line
-    options.binary_location = '/usr/bin/google-chrome'  # Path to Chrome binary
-    driver = webdriver.Chrome(options=options, executable_path='/usr/local/bin/chromedriver')
+    #options.add_argument('--no-sandbox')  
+    #options.add_argument('--disable-dev-shm-usage')  
+    #options.add_argument('--headless')
+    #options.add_argument('--disable-gpu')
+    #ptions.add_argument('--disable-extensions')
+    #options.add_argument('--remote-debugging-port=9222')  
+    options.binary_location = '/usr/bin/google-chrome' 
+    driver = webdriver.Chrome(options=options)
     driver.get(url)
 
     return driver
@@ -50,20 +50,20 @@ def receive_url():
     url = data.get('url')
     #end of injection
 
-    username = "*"
-    password = "*"
+    username = "B3N_K"
+    password = "#Ben****"
 
     driver = open_url_in_selenium("https://www.chess.com/login")
     login_to_site(driver, username, password)
 
     time.sleep(1)
     driver.get(url)
-    time.sleep(8)
+    time.sleep(4)
     driver.close()
     return "Received"
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80) 
+    app.run(host='127.0.0.1', port=5002) 
 
 
 """
