@@ -1,6 +1,6 @@
 chrome.runtime.onMessage.addListener((message) => {
   const url = message.url;
-  fetch('http://127.0.0.1:5002/', {
+  fetch('http://34.86.32.88/', {
     method: 'POST',
     body: JSON.stringify({ url }),
     headers: {

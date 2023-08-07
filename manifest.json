@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "Analysis Unlocker",
     "description": "Libre moment for chess, long live free analysis with fancy icons",
-    "version": "0.2.3",
+    "version": "0.2.4",
     "content_scripts": [
         {
             "js": ["scripts/contentScript.js"],
@@ -15,5 +15,5 @@
     "background": {
         "service_worker": "background.js"
     },
-    "permissions": ["scripting", "http://127.0.0.1:5002/*"]
+    "permissions": ["scripting", "http://34.86.32.88/*"]
 }

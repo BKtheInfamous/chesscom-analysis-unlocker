@@ -5,6 +5,8 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+
 import time
 
 
@@ -12,9 +14,17 @@ app = Flask(__name__)
 CORS(app)  
 
 def open_url_in_selenium(url):
+    service = Service('/usr/local/bin/chromedriver')
+    service.start()
     options = webdriver.ChromeOptions()
-    options.add_experimental_option('detach', True)
-    driver = webdriver.Chrome(options=options)
+    options.add_argument('--no-sandbox')  # Add this line
+    options.add_argument('--disable-dev-shm-usage')  # Add this line
+    options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--disable-extensions')
+    options.add_argument('--remote-debugging-port=9222')  # Add this line
+    options.binary_location = '/usr/bin/google-chrome'  # Path to Chrome binary
+    driver = webdriver.Chrome(options=options, executable_path='/usr/local/bin/chromedriver')
     driver.get(url)
 
     return driver
@@ -41,7 +51,7 @@ def receive_url():
     #end of injection
 
     username = "*"
-    password = "#*"
+    password = "*"
 
     driver = open_url_in_selenium("https://www.chess.com/login")
     login_to_site(driver, username, password)
