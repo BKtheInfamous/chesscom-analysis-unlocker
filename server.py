@@ -50,8 +50,8 @@ def receive_url():
     url = data.get('url')
     #end of injection
 
-    username = "B3N_K"
-    password = "#Ben****"
+    username = "*"
+    password = "*"
 
     driver = open_url_in_selenium("https://www.chess.com/login")
     login_to_site(driver, username, password)
