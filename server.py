@@ -57,3 +57,31 @@ def receive_url():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5002) 
+
+
+"""
+
+@app.route('/', methods=['POST'])
+def receive_url():
+    #INJECTION FROM EXT
+    data = request.get_json()
+    url = data.get('url')
+    #end of injection
+
+    username = "*"
+    password = "*"
+
+    driver = open_url_in_selenium("https://www.chess.com/login")
+    login_to_site(driver, username, password)
+
+    time.sleep(1)
+    driver.get(url)
+    time.sleep(3)
+    driver.get("https://www.chess.com/")
+    time.sleep(1)
+    
+    driver.close()
+    return "Received"
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5002) """
