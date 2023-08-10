@@ -31,12 +31,8 @@ def open_url_in_selenium(url):
 
 def login_to_site(driver, username, password):
     time.sleep(1)
-    try:
-        username_field = driver.find_element(By.ID, 'username')
-        password_field = driver.find_element(By.ID, 'password')
-    except NoSuchElementException:
-        print("Login elements not found!")
-        return
+    username_field = driver.find_element(By.ID, 'username')
+    password_field = driver.find_element(By.ID, 'password')
 
     username_field.send_keys(username)
     password_field.send_keys(password)
@@ -63,27 +59,31 @@ def receive_url():
     return "Received"
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=5002) 
+    app.run(host='0.0.0.0', port=5002) 
 
 
 """
-@app.route('/', methods=['POST'])
-def receive_url():
-    #INJECTION FROM EXT
-    data = request.get_json()
-    url = data.get('url')
-    #end of injection
-    username = "*"
-    password = "*"
-    driver = open_url_in_selenium("https://www.chess.com/login")
-    login_to_site(driver, username, password)
-    time.sleep(1)
-    driver.get(url)
-    time.sleep(3)
-    driver.get("https://www.chess.com/")
-    time.sleep(1)
-    
-    driver.close()
-    return "Received"
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5002) """
+
+systemd commands:
+
+sudo nano /etc/systemd/system/analysis-unlocker-gunicorn.service
+
+# start service
+sudo systemctl start analysis-unlocker-gunicorn
+
+# verify status
+sudo systemctl status analysis-unlocker-gunicorn
+
+# enable to start on boot
+sudo systemctl enable analysis-unlocker-gunicorn
+
+# view logs
+sudo journalctl -u analysis-unlocker-gunicorn -f
+
+# stop and restart service
+sudo systemctl stop analysis-unlocker-gunicorn
+sudo systemctl restart analysis-unlocker-gunicorn
+
+
+
+"""
