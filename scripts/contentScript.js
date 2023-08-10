@@ -10,20 +10,37 @@ const overlayCSS = `
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(0, 0, 0, 0.65);
         display: flex;
         justify-content: center;
         align-items: center;
         z-index: 9999;
     }
 
+    .loading-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    h2 {
+        color: white;
+        font-size: 30px;
+        margin-bottom: 10px;
+    }
+
+    .loading-bar-container {
+        width: 100%;
+    }
+
     .loading-bar {
-        width: 200px;
-        height: 20px;
+        width: 100%;
+        height: 30px;
         background-color: #fff;
-        border-radius: 10px;
+        border-radius: 15px;
         position: relative;
-        animation: loading 5s linear infinite;
+        animation: loading 15s linear infinite;
     }
 
     @keyframes loading {
@@ -32,24 +49,40 @@ const overlayCSS = `
     }
 `;
 
+
+
+
 const styleElement = document.createElement('style');
 styleElement.textContent = overlayCSS;
 document.head.appendChild(styleElement);
 
-function createOverlay() {
+function createOverlay(analysisLink) {
     const overlay = document.createElement('div');
     overlay.classList.add('overlay');
     document.body.appendChild(overlay);
 
+    const loadingContainer = document.createElement('div');
+    loadingContainer.classList.add('loading-container');
+    overlay.appendChild(loadingContainer);
+
+    const loadingHeading = document.createElement('h2');
+    loadingHeading.textContent = 'Analysis Loading';
+    loadingContainer.appendChild(loadingHeading);
+
+    const loadingBarContainer = document.createElement('div');
+    loadingBarContainer.classList.add('loading-bar-container');
+    loadingContainer.appendChild(loadingBarContainer);
+
     const loadingBar = document.createElement('div');
     loadingBar.classList.add('loading-bar');
-    overlay.appendChild(loadingBar);
+    loadingBarContainer.appendChild(loadingBar);
 
     setTimeout(() => {
         document.body.removeChild(overlay);
-        window.location.reload(); 
-    }, 5000); // adjusment here
+        window.open(analysisLink, '_blank');
+    }, 15000);
 }
+
 
 
 function buttonTestOne() {
@@ -69,7 +102,6 @@ function buttonTestOne() {
         addButton.appendChild(chooseGame);
     
         chooseGame.addEventListener('click', () => {
-            createOverlay();
 
             let tr = chooseGame.closest('tr');
             let parentOfLinkEle = tr.querySelector(".archived-games-analyze-cell");
@@ -77,6 +109,7 @@ function buttonTestOne() {
             let analysisLinkRaw = linkEle.getAttribute('href');
             let analysisLink = "https://www.chess.com" + analysisLinkRaw +"?tab=review"
             console.log("Analysis URL: "+analysisLink);
+            createOverlay(analysisLink);
             chrome.runtime.sendMessage({ url: analysisLink });
         });
     });
