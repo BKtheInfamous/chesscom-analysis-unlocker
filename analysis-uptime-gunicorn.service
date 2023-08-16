@@ -1,0 +1,12 @@
+[Unit]
+Description=Gunicorn: Flask App analysis-uptime
+After=network.target
+
+[Service]
+User=user
+WorkingDirectory=/home/user
+ExecStart=/usr/bin/gunicorn server:app -b 127.0.0.1:8001
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
