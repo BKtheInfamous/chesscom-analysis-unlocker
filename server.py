@@ -123,4 +123,24 @@ sudo nano /etc/nginx/sites-available/analysis-uptime
 #GUNICORN
 sudo nano /etc/systemd/system/analysis-uptime-gunicorn.service
 
+    options.add_argument('--no-sandbox')  
+    options.add_argument('--disable-dev-shm-usage')  
+    options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--disable-extensions')
+    options.add_argument('--remote-debugging-port=9222') 
+    options.add_argument('--log-level=DEBUG')
+    options.add_argument('--enable-logging')
+    options.add_argument('--disable-software-rasterizer')
+    #log_file_path = '/home/username/chrome_logs.log'
+    #options.add_argument('--log-path=' + log_file_path)
+    driver = webdriver.Chrome(options=options)
+
+    logging.info('Chrome logs:')
+    
+    try:
+        driver.get(url)
+    except Exception as e:
+        logging.error(f'Exception occurred: {str(e)}')
+
 """
